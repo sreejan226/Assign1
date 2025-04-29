@@ -95,7 +95,7 @@ const Forum = () => {
               </h3>
               <button
                 onClick={() => upvoteThread(thread.id)}
-                className="bg-gradient-to-r from-yellow-300 to-yellow-500 text-gray-900 border-none rounded-lg cursor-pointer py-2 px-5 font-bold text-base shadow transition-colors font-inherit"
+                className="bg-gradient-to-r from-blue-300 to-blue-500 text-white border-none rounded-lg cursor-pointer py-2 px-5 font-bold text-base shadow transition-colors font-inherit"
               >
                 👍 {thread.upvotes}
               </button>
