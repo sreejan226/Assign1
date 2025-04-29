@@ -1,7 +1,7 @@
 import React from "react";
 import "./HeroSection.css";
 
-const images = Array.from({ length: 10 }, (_, i) => `src/assets/dragon_${i + 1}.jpg`);
+const images = Array.from({ length: 10 }, (_, i) => `public/dragon_${i + 1}.jpg`);
 
 const HeroSection = () => {
     return (
