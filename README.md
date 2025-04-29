@@ -1,4 +1,4 @@
-# EcellNew React App
+ React App
 
 A modern, responsive web application for E-cell, built with React and Vite.
 
