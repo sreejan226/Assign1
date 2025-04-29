@@ -49,50 +49,73 @@ const Forum = () => {
   };
 
   return (
-    <div style={styles.page}>
-      <h1 style={styles.heading}>Discussion Forum</h1>
+    <div className="max-w-3xl mx-auto py-10 px-4 min-h-screen bg-gradient-to-br from-slate-50 to-blue-100 font-sans">
+      <h1 className="text-center font-bold text-4xl mb-9 text-blue-900 tracking-wide font-inter">
+        Discussion Forum
+      </h1>
 
-
-      <div style={styles.newThreadBox}>
-        <h2 style={styles.subheading}>Start a New Discussion</h2>
+      <div className="mb-10 p-8 border border-slate-200 rounded-2xl bg-white shadow-lg">
+        <h2 className="font-semibold text-xl mb-5 text-blue-900 tracking-wide">
+          Start a New Discussion
+        </h2>
         <input
           type="text"
           placeholder="Thread title"
           value={newThreadTitle}
           onChange={(e) => setNewThreadTitle(e.target.value)}
-          style={styles.input}
+          className="w-full p-3 mb-3 rounded-lg border border-slate-300 text-base bg-slate-50 outline-none transition-colors font-inherit"
         />
         <textarea
           placeholder="Thread content"
           value={newThreadContent}
           onChange={(e) => setNewThreadContent(e.target.value)}
-          style={styles.textarea}
+          className="w-full p-3 min-h-[90px] mb-3 rounded-lg border border-slate-300 text-base bg-slate-50 outline-none transition-colors font-inherit resize-y"
         />
-        <button onClick={createThread} style={styles.button}>
+        <button
+          onClick={createThread}
+          className="py-3 px-8 bg-gradient-to-r from-blue-700 to-blue-400 text-white border-none rounded-lg cursor-pointer font-semibold text-base shadow-md transition-colors font-inherit"
+        >
           Create Thread
         </button>
       </div>
 
       {threads.length === 0 ? (
-        <p style={styles.noThreads}>No discussions yet. Start one!</p>
+        <p className="text-center mt-16 text-gray-500 text-lg">
+          No discussions yet. Start one!
+        </p>
       ) : (
         threads.map((thread) => (
-          <div key={thread.id} style={styles.threadCard}>
-            <div style={styles.threadHeader}>
-              <h3 style={styles.threadTitle}>{thread.title}</h3>
-              <button onClick={() => upvoteThread(thread.id)} style={styles.upvoteButton}>
+          <div
+            key={thread.id}
+            className="mb-10 p-7 border border-slate-200 rounded-xl bg-white shadow-lg"
+          >
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-lg font-semibold text-blue-900 m-0">
+                {thread.title}
+              </h3>
+              <button
+                onClick={() => upvoteThread(thread.id)}
+                className="bg-gradient-to-r from-yellow-300 to-yellow-500 text-gray-900 border-none rounded-lg cursor-pointer py-2 px-5 font-bold text-base shadow transition-colors font-inherit"
+              >
                 👍 {thread.upvotes}
               </button>
             </div>
-            <p style={styles.threadContent}>{thread.content}</p>
+            <p className="text-base text-gray-700 mb-2 mt-0">
+              {thread.content}
+            </p>
 
-            <div style={styles.commentSection}>
-              <h4 style={styles.commentHeading}>Comments</h4>
+            <div className="mt-6 border-t border-slate-200 pt-4">
+              <h4 className="font-medium text-base mb-2 text-blue-700">
+                Comments
+              </h4>
               {thread.comments.length === 0 ? (
-                <p style={styles.noComments}>No comments yet.</p>
+                <p className="text-gray-400 italic mb-2">No comments yet.</p>
               ) : (
                 thread.comments.map((comment) => (
-                  <div key={comment.id} style={styles.comment}>
+                  <div
+                    key={comment.id}
+                    className="bg-lime-50 p-3 rounded-lg mb-2 text-base text-slate-700 font-inherit"
+                  >
                     {comment.text}
                   </div>
                 ))
@@ -115,183 +138,22 @@ const CommentInput = ({ threadId, addComment }) => {
   };
 
   return (
-    <div style={styles.commentInput}>
+    <div className="mt-2 flex items-center gap-2">
       <input
         type="text"
         placeholder="Write a comment..."
         value={commentText}
         onChange={(e) => setCommentText(e.target.value)}
-        style={styles.input}
+        className="w-full p-3 rounded-lg border border-slate-300 text-base bg-slate-50 outline-none transition-colors font-inherit"
       />
-      <button onClick={handleAddComment} style={styles.smallButton}>
+      <button
+        onClick={handleAddComment}
+        className="py-2 px-6 bg-gradient-to-r from-green-600 to-green-400 text-white border-none rounded-lg cursor-pointer font-medium text-base ml-2 shadow transition-colors font-inherit"
+      >
         Comment
       </button>
     </div>
   );
-};
-
-const styles = {
-  page: {
-    maxWidth: "800px",
-    margin: "0 auto",
-    padding: "40px 16px 80px 16px",
-    fontFamily: "'Segoe UI', 'Inter', Arial, sans-serif",
-    background: "linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%)",
-    minHeight: "100vh",
-  },
-  heading: {
-    textAlign: "center",
-    fontWeight: 700,
-    fontSize: "2.7rem",
-    marginBottom: "36px",
-    color: "#1a237e",
-    letterSpacing: "1px",
-    fontFamily: "'Inter', 'Segoe UI', Arial, sans-serif",
-  },
-  subheading: {
-    fontWeight: 600,
-    fontSize: "1.3rem",
-    marginBottom: "18px",
-    color: "#263159",
-    letterSpacing: "0.5px",
-  },
-  newThreadBox: {
-    marginBottom: "38px",
-    padding: "32px",
-    border: "1px solid #e3e8ee",
-    borderRadius: "18px",
-    backgroundColor: "#fff",
-    boxShadow: "0 2px 16px 0 rgba(60,72,88,0.07)",
-  },
-  input: {
-    width: "100%",
-    padding: "13px",
-    marginBottom: "14px",
-    borderRadius: "9px",
-    border: "1px solid #cfd8dc",
-    fontSize: "1rem",
-    background: "#f8fafc",
-    outline: "none",
-    transition: "border 0.2s",
-    fontFamily: "inherit",
-  },
-  textarea: {
-    width: "100%",
-    padding: "13px",
-    minHeight: "90px",
-    marginBottom: "14px",
-    borderRadius: "9px",
-    border: "1px solid #cfd8dc",
-    fontSize: "1rem",
-    background: "#f8fafc",
-    outline: "none",
-    transition: "border 0.2s",
-    fontFamily: "inherit",
-    resize: "vertical",
-  },
-  button: {
-    padding: "13px 32px",
-    background: "linear-gradient(90deg, #1976d2 0%, #42a5f5 100%)",
-    color: "#fff",
-    border: "none",
-    borderRadius: "9px",
-    cursor: "pointer",
-    fontWeight: 600,
-    fontSize: "1rem",
-    boxShadow: "0 2px 8px 0 rgba(25,118,210,0.08)",
-    transition: "background 0.2s",
-    fontFamily: "inherit",
-  },
-  smallButton: {
-    padding: "10px 22px",
-    background: "linear-gradient(90deg, #43a047 0%, #66bb6a 100%)",
-    color: "#fff",
-    border: "none",
-    borderRadius: "9px",
-    cursor: "pointer",
-    fontWeight: 500,
-    fontSize: "0.98rem",
-    marginLeft: "10px",
-    boxShadow: "0 1px 4px 0 rgba(67,160,71,0.08)",
-    transition: "background 0.2s",
-    fontFamily: "inherit",
-  },
-  threadCard: {
-    marginBottom: "38px",
-    padding: "28px",
-    border: "1px solid #e3e8ee",
-    borderRadius: "16px",
-    backgroundColor: "#fff",
-    boxShadow: "0 2px 16px 0 rgba(60,72,88,0.07)",
-  },
-  threadHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "8px",
-  },
-  threadTitle: {
-    fontSize: "1.2rem",
-    fontWeight: 600,
-    color: "#263159",
-    margin: 0,
-  },
-  threadContent: {
-    fontSize: "1.05rem",
-    color: "#374151",
-    marginBottom: "10px",
-    marginTop: "0",
-  },
-  upvoteButton: {
-    background: "linear-gradient(90deg, #ffd600 0%, #ffb300 100%)",
-    color: "#222",
-    border: "none",
-    borderRadius: "9px",
-    cursor: "pointer",
-    padding: "8px 18px",
-    fontWeight: "bold",
-    fontSize: "1rem",
-    boxShadow: "0 1px 4px 0 rgba(255,214,0,0.08)",
-    transition: "background 0.2s",
-    fontFamily: "inherit",
-  },
-  commentSection: {
-    marginTop: "22px",
-    borderTop: "1px solid #e3e8ee",
-    paddingTop: "14px",
-  },
-  commentHeading: {
-    fontWeight: 500,
-    fontSize: "1.05rem",
-    marginBottom: "10px",
-    color: "#1976d2",
-  },
-  comment: {
-    backgroundColor: "#f1f8e9",
-    padding: "12px",
-    borderRadius: "9px",
-    marginBottom: "10px",
-    fontSize: "1rem",
-    color: "#37474f",
-    fontFamily: "inherit",
-  },
-  commentInput: {
-    marginTop: "10px",
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-  },
-  noThreads: {
-    textAlign: "center",
-    marginTop: "60px",
-    color: "#789",
-    fontSize: "1.2rem",
-  },
-  noComments: {
-    color: "#aaa",
-    fontStyle: "italic",
-    marginBottom: "10px",
-  },
 };
 
 export default Forum;
